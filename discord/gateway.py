@@ -777,18 +777,18 @@ class DiscordVoiceWebSocket(websockets.client.WebSocketClientProtocol):
         self._connection.secret_key = data.get('secret_key')
 
     async def _do_hacks(self):
-        # Everything below this is a hack because discord keeps breaking things
+        # Everything below this is a hack because Discord keeps breaking things
 
         # hack #1
         # speaking needs to be set otherwise reconnecting makes you forget that the
         # bot is playing audio and you wont hear it until the bot sets speaking again
         await self.speak()
 
-        # hack #3:
+        # hack #2:
         # you need to wait for some indeterminate amount of time before sending silence
         await asyncio.sleep(0.5)
 
-        # hack #2:
+        # hack #3:
         # sending a silence packet is required to be able to read from the socket
         self._connection.send_audio_packet(b'\xF8\xFF\xFE', encode=False)
 

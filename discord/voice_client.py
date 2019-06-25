@@ -557,7 +557,7 @@ class VoiceClient:
         if self._reader is None:
             raise ValueError('Not receiving anything.')
 
-        self._reader._set_sink(sink)
+        self._reader._set_sink(value)
 
     def stop(self):
         """Stops playing and receiving audio."""
